@@ -1,10 +1,11 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
 
 class Settings(BaseSettings):
-    app_name: str
-    aws_region: str
+    model_config = SettingsConfigDict(env_file=".env")
 
-    class Config:
-        env_file = ".env"
+    app_name: str = "Expense Tracker"
+    aws_region: str = "ap-south-1"
+
 
 settings = Settings()
