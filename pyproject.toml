@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "boto3>=1.42.97",
+    "pydantic-settings>=2.11.0",
 ]
 
 [project.scripts]
@@ -13,3 +14,14 @@ start = "app.main:main"
 
 [tool.uv]
 package = true
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.15",
+]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
