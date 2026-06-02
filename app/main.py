@@ -1,6 +1,4 @@
+from app.core.config import settings
+
 def main():
-    print("Expense Tracker Api")
-
-
-if __name__ == "__main__":
-    main()
+    print(settings.app_name)
