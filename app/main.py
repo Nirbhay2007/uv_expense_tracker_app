@@ -1,27 +1,31 @@
+from fastapi import FastAPI
+
+from app.api.health import router as health_router
 from app.core.config import settings
 from app.core.logger import bootstrap_logging, get_logger
 
+bootstrap_logging(settings.log_level)
 
-def main() -> None:
-    bootstrap_logging(settings.log_level)
+logger = get_logger(__name__)
 
-    logger = get_logger(__name__)
+logger.info("Application bootstrap started")
 
-    logger.info("Application bootstrap started")
+app = FastAPI(
+    title=settings.app_name,
+    version="0.1.0",
+)
 
-    logger.info(
-        "Application context loaded: app_name=%s aws_region=%s",
-        settings.app_name,
-        settings.aws_region,
-    )
+app.include_router(health_router)
 
-    logger.info(
-        "Application ready: log_level=%s",
-        settings.log_level,
-    )
+logger.info(
+    "Application context loaded: app_name=%s aws_region=%s",
+    settings.app_name,
+    settings.aws_region,
+)
 
-    logger.info("Application bootstrap completed successfully")
+logger.info(
+    "Application ready: log_level=%s",
+    settings.log_level,
+)
 
-
-if __name__ == "__main__":
-    main()
+logger.info("Application bootstrap completed successfully")
