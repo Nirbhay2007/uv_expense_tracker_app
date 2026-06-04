@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.expense import router as expense_router
 from app.api.health import router as health_router
 from app.core.config import settings
 from app.core.logger import bootstrap_logging, get_logger
@@ -24,6 +25,7 @@ async def root():
         "status": "running",
     }
 app.include_router(health_router)
+app.include_router(expense_router)
 
 logger.info(
     "Application context loaded: app_name=%s aws_region=%s",
