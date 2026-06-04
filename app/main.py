@@ -15,6 +15,14 @@ app = FastAPI(
     version="0.1.0",
 )
 
+@app.get("/")
+
+async def root():
+    return {
+        "app": settings.app_name,
+        "version": "0.1.0",
+        "status": "running",
+    }
 app.include_router(health_router)
 
 logger.info(
