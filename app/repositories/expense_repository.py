@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from sqlalchemy.orm import Session
 
 from app.models.expense import Expense
@@ -13,7 +15,7 @@ class ExpenseRepository:
     def create(
         self,
         description: str,
-        amount: float,
+        amount: Decimal,
     ) -> Expense:
         expense = Expense(
             description=description,
