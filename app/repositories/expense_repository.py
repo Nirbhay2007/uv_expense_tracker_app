@@ -50,7 +50,6 @@ class ExpenseRepository:
     ) -> Expense:
         expense.description = description
         expense.amount = amount
-
         self.db.commit()
         self.db.refresh(expense)
 
