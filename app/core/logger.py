@@ -8,10 +8,10 @@ def _resolve_level(level_name: str | int) -> int:
         return level_name
 
     normalized = level_name.strip().upper()
-    resolved = logging.getLevelName(normalized)
 
-    if isinstance(resolved, int):
-        return resolved
+    mapping = logging.getLevelNamesMapping()
+    if normalized in mapping:
+        return mapping[normalized]
 
     raise ValueError(f"Invalid log level: {level_name}")
 
