@@ -11,6 +11,8 @@ def main() -> None:
             amount=Decimal("120.00"),
         )
 
+
+
         session.add(expense)
         session.commit()
 
