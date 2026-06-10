@@ -1,5 +1,0 @@
-$kind: http-request
-name: Get Expense
-method: GET
-url: '{{baseUrl}}/expenses/{{expense_id}}'
-order: 1500
