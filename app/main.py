@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
-from app.api.health import router as health_router
 from app.api.expense import router as expense_router
+from app.api.health import router as health_router
 from app.core.config import settings
 from app.core.logger import bootstrap_logging, get_logger
 from app.lifecycle import lifespan

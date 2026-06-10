@@ -1,7 +1,6 @@
 from app.core.database import Base, engine
 
 # Import models so SQLAlchemy registers them
-from app.models.expense import Expense
 
 
 def main() -> None:
