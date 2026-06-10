@@ -1,0 +1,15 @@
+$kind: http-request
+name: Create Expense
+method: POST
+url: '{{baseUrl}}/expenses'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "description": "Lunch",
+      "amount": "12.50"
+    }

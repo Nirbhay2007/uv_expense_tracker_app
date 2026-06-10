@@ -1,17 +1,22 @@
 [project]
 name = "learn-uv"
 version = "0.1.0"
-description = "Add your description here"
+description = "Expense Tracker API"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.13"
+
 dependencies = [
-    "alembic>=1.16.5",
+    "alembic>=1.18.4",
     "boto3>=1.42.97",
+    "fastapi>=0.136.3",
+    "psycopg2-binary>=2.9.12",
     "pydantic-settings>=2.11.0",
+    "sqlalchemy>=2.0.50",
+    "uvicorn>=0.48.0",
 ]
 
 [project.scripts]
-start = "app.main:main"
+start = "app.server:main"
 
 [tool.uv]
 package = true
@@ -26,3 +31,6 @@ line-length = 88
 
 [tool.ruff.lint]
 select = ["E", "F", "I"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]

@@ -10,7 +10,6 @@ class Settings(BaseSettings):
     app_name: str = "Expense Tracker"
     aws_region: str = "ap-south-1"
     log_level: str = "INFO"
-
     database_url: str
 
 
