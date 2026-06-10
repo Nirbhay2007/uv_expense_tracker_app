@@ -46,7 +46,7 @@ class ExpenseRepository:
         self,
         expense: Expense,
         description: str,
-        amount: float,
+        amount: Decimal,
     ) -> Expense:
         expense.description = description
         expense.amount = amount
