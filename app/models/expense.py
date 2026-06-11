@@ -1,9 +1,10 @@
 from decimal import Decimal
 
-from sqlalchemy import ForeignKey, Numeric, String
+from sqlalchemy import Enum, ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
+from app.enums.expense_category import ExpenseCategory
 
 
 class Expense(Base):
@@ -26,5 +27,10 @@ class Expense(Base):
 
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id"),
+        nullable=False,
+    )
+
+    category: Mapped[ExpenseCategory] = mapped_column(
+        Enum(ExpenseCategory),
         nullable=False,
     )

@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from sqlalchemy.orm import Session
 
+from app.enums.expense_category import ExpenseCategory
 from app.models.expense import Expense
 
 
@@ -17,11 +18,13 @@ class ExpenseRepository:
         description: str,
         amount: Decimal,
         user_id: int,
+        category: ExpenseCategory,
     ) -> Expense:
         expense = Expense(
             description=description,
             amount=amount,
             user_id=user_id,
+            category=category,
         )
 
         self.db.add(expense)
@@ -68,9 +71,11 @@ class ExpenseRepository:
         expense: Expense,
         description: str,
         amount: Decimal,
+        category: ExpenseCategory,
     ) -> Expense:
         expense.description = description
         expense.amount = amount
+        expense.category = category
 
         self.db.commit()
         self.db.refresh(expense)

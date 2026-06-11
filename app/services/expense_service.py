@@ -25,6 +25,7 @@ class ExpenseService:
             description=expense.description,
             amount=expense.amount,
             user_id=user_id,
+            category=expense.category,
         )
 
     def get_expenses(
@@ -79,6 +80,7 @@ class ExpenseService:
             expense=expense,
             description=expense_data.description,
             amount=expense_data.amount,
+            category=expense_data.category,
         )
 
     def delete_expense(
