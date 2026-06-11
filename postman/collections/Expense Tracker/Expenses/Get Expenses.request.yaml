@@ -1,29 +1,10 @@
 $kind: http-request
 name: Get Expenses
 method: GET
-url: '{{baseUrl}}/expenses'
-order: 1000
+url: "{{baseUrl}}/expenses"
 auth:
   type: bearer
   credentials:
     - key: token
       value: '{{authToken}}'
-params:
-  - key: page
-    value: '1'
-    enabled: true
-  - key: limit
-    value: '20'
-    enabled: true
-  - key: category
-    value: ''
-    enabled: false
-  - key: min_amount
-    value: ''
-    enabled: false
-  - key: max_amount
-    value: ''
-    enabled: false
-  - key: search
-    value: ''
-    enabled: false
+order: 1000

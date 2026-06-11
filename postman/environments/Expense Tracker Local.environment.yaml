@@ -2,13 +2,7 @@ name: Expense Tracker Local
 values:
   - key: baseUrl
     value: 'http://localhost:8000'
-    enabled: true
-    type: default
   - key: authToken
-    value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzUzMDkzMzI3fQ.Wr3sMFJFJGJJFJGJJFJGJJFJGJJFJGJJFJGJJFJGJJF'
-    enabled: true
-    type: secret
+    value: ''
   - key: expense_id
     value: '9'
-    enabled: true
-    type: default
