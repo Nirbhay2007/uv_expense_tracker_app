@@ -1,10 +1,10 @@
+from decimal import Decimal
+
 from fastapi import HTTPException
 
-from app.core.logger import get_logger
+from app.models.expense import ExpenseCategory
 from app.repositories.expense_repository import ExpenseRepository
 from app.schemas.expense import ExpenseCreate
-
-logger = get_logger(__name__)
 
 
 class ExpenseService:
@@ -17,44 +17,42 @@ class ExpenseService:
     def create_expense(
         self,
         expense: ExpenseCreate,
+        user_id: int,
     ):
         if expense.amount <= 0:
-            raise HTTPException(
-                status_code=400,
-                detail="Expense amount must be greater than zero",
+            raise ValueError(
+                "Expense amount must be greater than zero"
             )
-
-        logger.info(
-            "Creating expense description=%s amount=%s",
-            expense.description,
-            expense.amount,
-        )
 
         return self.repository.create(
             description=expense.description,
             amount=expense.amount,
+            user_id=user_id,
+            category=expense.category,
         )
 
     def get_expenses(
         self,
+        user_id: int,
+        category: ExpenseCategory | None = None,
+        min_amount: Decimal | None = None,
+        max_amount: Decimal | None = None,
     ):
-        logger.info(
-            "Fetching all expenses",
+        return self.repository.get_all_by_user(
+            user_id=user_id,
+            category=category,
+            min_amount=min_amount,
+            max_amount=max_amount,
         )
-
-        return self.repository.get_all()
 
     def get_expense(
         self,
         expense_id: int,
+        user_id: int,
     ):
-        logger.info(
-            "Fetching expense id=%s",
+        expense = self.repository.get_by_id_and_user(
             expense_id,
-        )
-
-        expense = self.repository.get_by_id(
-            expense_id,
+            user_id,
         )
 
         if expense is None:
@@ -69,14 +67,11 @@ class ExpenseService:
         self,
         expense_id: int,
         expense_data: ExpenseCreate,
+        user_id: int,
     ):
-        logger.info(
-            "Updating expense id=%s",
+        expense = self.repository.get_by_id_and_user(
             expense_id,
-        )
-
-        expense = self.repository.get_by_id(
-            expense_id,
+            user_id,
         )
 
         if expense is None:
@@ -86,28 +81,25 @@ class ExpenseService:
             )
 
         if expense_data.amount <= 0:
-            raise HTTPException(
-                status_code=400,
-                detail="Expense amount must be greater than zero",
+            raise ValueError(
+                "Expense amount must be greater than zero"
             )
 
         return self.repository.update(
             expense=expense,
             description=expense_data.description,
             amount=expense_data.amount,
+            category=expense_data.category,
         )
 
     def delete_expense(
         self,
         expense_id: int,
+        user_id: int,
     ) -> None:
-        logger.info(
-            "Deleting expense id=%s",
+        expense = self.repository.get_by_id_and_user(
             expense_id,
-        )
-
-        expense = self.repository.get_by_id(
-            expense_id,
+            user_id,
         )
 
         if expense is None:
@@ -119,3 +111,15 @@ class ExpenseService:
         self.repository.delete(
             expense,
         )
+
+    def get_expense_summary(
+        self,
+        user_id: int,
+    ):
+        return self.repository.get_summary_by_user(user_id)
+
+    def get_category_breakdown(
+        self,
+        user_id: int,
+    ):
+        return self.repository.get_category_breakdown_by_user(user_id)
