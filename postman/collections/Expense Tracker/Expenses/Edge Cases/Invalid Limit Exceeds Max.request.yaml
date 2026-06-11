@@ -1,0 +1,17 @@
+$kind: http-request
+name: Invalid Limit Exceeds Max
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1130
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: page
+    value: '1'
+    enabled: true
+  - key: limit
+    value: '200'
+    enabled: true

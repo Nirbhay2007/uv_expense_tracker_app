@@ -1,0 +1,23 @@
+$kind: http-request
+name: Search with Filters
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1070
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: search
+    value: 'coffee'
+    enabled: true
+  - key: category
+    value: 'FOOD'
+    enabled: true
+  - key: min_amount
+    value: '50'
+    enabled: true
+  - key: max_amount
+    value: '500'
+    enabled: true

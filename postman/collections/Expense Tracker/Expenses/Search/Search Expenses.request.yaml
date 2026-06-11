@@ -1,0 +1,14 @@
+$kind: http-request
+name: Search Expenses
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1060
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: search
+    value: 'coffee'
+    enabled: true

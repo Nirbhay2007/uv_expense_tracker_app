@@ -3,3 +3,8 @@ name: Delete Expense
 method: DELETE
 url: '{{baseUrl}}/expenses/{{expense_id}}'
 order: 4000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'

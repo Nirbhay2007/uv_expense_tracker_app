@@ -1,0 +1,17 @@
+$kind: http-request
+name: Invalid Page Zero
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1140
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: page
+    value: '0'
+    enabled: true
+  - key: limit
+    value: '20'
+    enabled: true

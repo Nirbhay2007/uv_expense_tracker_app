@@ -1,0 +1,14 @@
+$kind: http-request
+name: Filter by Category
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1010
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: category
+    value: 'FOOD'
+    enabled: true

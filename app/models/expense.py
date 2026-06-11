@@ -1,8 +1,9 @@
+from datetime import datetime
 from decimal import Decimal
 from enum import Enum
 
-from sqlalchemy import Enum as SQLEnum
-from sqlalchemy import ForeignKey, Numeric, String
+from sqlalchemy import DateTime, Enum as SQLEnum
+from sqlalchemy import ForeignKey, Numeric, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -44,4 +45,10 @@ class Expense(Base):
         SQLEnum(ExpenseCategory),
         nullable=False,
         default=ExpenseCategory.OTHER,
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime,
+        server_default=func.now(),
+        nullable=False,
     )

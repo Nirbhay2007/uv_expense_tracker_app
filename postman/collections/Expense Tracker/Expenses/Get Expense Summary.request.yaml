@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get Expense Summary
+method: GET
+url: '{{baseUrl}}/expenses/summary'
+order: 1200
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'

@@ -1,0 +1,20 @@
+$kind: http-request
+name: Filter Combined
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1050
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: category
+    value: 'FOOD'
+    enabled: true
+  - key: min_amount
+    value: '100'
+    enabled: true
+  - key: max_amount
+    value: '1000'
+    enabled: true

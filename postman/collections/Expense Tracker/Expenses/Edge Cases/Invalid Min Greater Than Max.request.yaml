@@ -1,0 +1,17 @@
+$kind: http-request
+name: Invalid Min Greater Than Max
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1120
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: min_amount
+    value: '500'
+    enabled: true
+  - key: max_amount
+    value: '100'
+    enabled: true

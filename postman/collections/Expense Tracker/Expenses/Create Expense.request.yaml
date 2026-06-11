@@ -3,6 +3,11 @@ name: Create Expense
 method: POST
 url: '{{baseUrl}}/expenses'
 order: 2000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
 headers:
   - key: Content-Type
     value: application/json
@@ -11,5 +16,6 @@ body:
   content: |-
     {
       "description": "Lunch",
-      "amount": "12.50"
+      "amount": "12.50",
+      "category": "FOOD"
     }

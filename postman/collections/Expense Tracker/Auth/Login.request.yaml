@@ -13,9 +13,10 @@ body:
       "email": "user@example.com",
       "password": "secret123"
     }
-events:
-  - listen: test
-    script: |-
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
       var json = pm.response.json();
       if (json.access_token) {
         pm.environment.set("authToken", json.access_token);

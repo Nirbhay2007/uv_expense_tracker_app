@@ -1,0 +1,12 @@
+$kind: http-request
+name: No Auth Token
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1160
+params:
+  - key: page
+    value: '1'
+    enabled: true
+  - key: limit
+    value: '20'
+    enabled: true

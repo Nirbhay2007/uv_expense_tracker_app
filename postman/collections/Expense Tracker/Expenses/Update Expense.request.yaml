@@ -3,6 +3,11 @@ name: Update Expense
 method: PUT
 url: '{{baseUrl}}/expenses/{{expense_id}}'
 order: 3000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
 headers:
   - key: Content-Type
     value: application/json
@@ -11,5 +16,6 @@ body:
   content: |-
     {
       "description": "Dinner",
-      "amount": "25.00"
+      "amount": "25.00",
+      "category": "FOOD"
     }

@@ -1,0 +1,17 @@
+$kind: http-request
+name: Page 1
+method: GET
+url: '{{baseUrl}}/expenses'
+order: 1090
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+params:
+  - key: page
+    value: '1'
+    enabled: true
+  - key: limit
+    value: '5'
+    enabled: true

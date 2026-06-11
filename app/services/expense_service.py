@@ -4,7 +4,11 @@ from fastapi import HTTPException
 
 from app.models.expense import ExpenseCategory
 from app.repositories.expense_repository import ExpenseRepository
-from app.schemas.expense import ExpenseCreate
+from app.schemas.expense import (
+    ExpenseCreate,
+    ExpenseFilterParams,
+    PaginatedExpenseResponse,
+)
 
 
 class ExpenseService:
@@ -34,15 +38,64 @@ class ExpenseService:
     def get_expenses(
         self,
         user_id: int,
-        category: ExpenseCategory | None = None,
-        min_amount: Decimal | None = None,
-        max_amount: Decimal | None = None,
-    ):
-        return self.repository.get_all_by_user(
+        filters: ExpenseFilterParams,
+    ) -> PaginatedExpenseResponse:
+        """Fetch filtered, searched, and paginated expenses.
+
+        Validates filter inputs, delegates query building to the
+        repository, and assembles the paginated response.
+        """
+        # Validate: min_amount must not exceed max_amount
+        if (
+            filters.min_amount is not None
+            and filters.max_amount is not None
+            and filters.min_amount > filters.max_amount
+        ):
+            raise HTTPException(
+                status_code=400,
+                detail="min_amount cannot be greater than max_amount",
+            )
+
+        # Validate: amounts must be non-negative
+        if filters.min_amount is not None and filters.min_amount < 0:
+            raise HTTPException(
+                status_code=400,
+                detail="min_amount must be non-negative",
+            )
+        if filters.max_amount is not None and filters.max_amount < 0:
+            raise HTTPException(
+                status_code=400,
+                detail="max_amount must be non-negative",
+            )
+
+        # Calculate offset from page and limit
+        offset = (filters.page - 1) * filters.limit
+
+        # Fetch total count (for pagination metadata)
+        total = self.repository.count_by_user(
             user_id=user_id,
-            category=category,
-            min_amount=min_amount,
-            max_amount=max_amount,
+            category=filters.category,
+            min_amount=filters.min_amount,
+            max_amount=filters.max_amount,
+            search=filters.search,
+        )
+
+        # Fetch paginated results
+        items = self.repository.get_all_by_user(
+            user_id=user_id,
+            category=filters.category,
+            min_amount=filters.min_amount,
+            max_amount=filters.max_amount,
+            search=filters.search,
+            offset=offset,
+            limit=filters.limit,
+        )
+
+        return PaginatedExpenseResponse.build(
+            items=items,
+            page=filters.page,
+            limit=filters.limit,
+            total=total,
         )
 
     def get_expense(
@@ -123,3 +176,47 @@ class ExpenseService:
         user_id: int,
     ):
         return self.repository.get_category_breakdown_by_user(user_id)
+
+    def get_monthly_report(
+        self,
+        user_id: int,
+        year: int,
+        month: int,
+    ) -> dict:
+        """Build a complete monthly report with category breakdown.
+
+        Validates month/year inputs, fetches aggregated data from the
+        repository, and assembles the response dict.
+        """
+        if month < 1 or month > 12:
+            raise HTTPException(
+                status_code=400,
+                detail="month must be between 1 and 12",
+            )
+
+        if year < 1900 or year > 2100:
+            raise HTTPException(
+                status_code=400,
+                detail="year must be between 1900 and 2100",
+            )
+
+        summary = self.repository.get_monthly_summary(
+            user_id=user_id,
+            year=year,
+            month=month,
+        )
+
+        category_breakdown = self.repository.get_monthly_category_breakdown(
+            user_id=user_id,
+            year=year,
+            month=month,
+        )
+
+        return {
+            "year": year,
+            "month": month,
+            "total_spent": summary["total_spent"],
+            "expense_count": summary["expense_count"],
+            "average_expense": summary["average_expense"],
+            "category_breakdown": category_breakdown,
+        }
