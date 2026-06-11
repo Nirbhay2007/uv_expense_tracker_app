@@ -131,4 +131,7 @@ class ExpenseRepository:
             .all()
         )
 
-        return {category.value: (total or Decimal("0.0")) for category, total in results}
+        return {
+            category.value: (total or Decimal("0.0"))
+            for category, total in results
+        }
