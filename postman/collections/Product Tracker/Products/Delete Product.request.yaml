@@ -1,8 +1,8 @@
 $kind: http-request
-name: Get Expense
-method: GET
-url: '{{baseUrl}}/expenses/{{expense_id}}'
-order: 1500
+name: Delete Product
+method: DELETE
+url: '{{baseUrl}}/products/{{product_id}}'
+order: 4000
 auth:
   type: bearer
   credentials:

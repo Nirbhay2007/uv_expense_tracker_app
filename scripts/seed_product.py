@@ -1,5 +1,5 @@
 def main() -> None:
-    print("Seed data removed")
+    print("Product seed data removed")
 
 
 if __name__ == "__main__":

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.auth import router as auth_router
-from app.api.expense import router as expense_router
+from app.api.product import router as product_router
 from app.api.health import router as health_router
 from app.core.config import settings
 from app.core.logger import bootstrap_logging, get_logger
@@ -30,7 +30,7 @@ async def root():
 
 
 app.include_router(health_router)
-app.include_router(expense_router)
+app.include_router(product_router)
 app.include_router(auth_router)
 
 logger.info(

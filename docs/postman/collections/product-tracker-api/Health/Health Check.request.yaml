@@ -2,5 +2,5 @@ $kind: http-request
 name: Health Check
 method: GET
 url: '{{baseUrl}}/health'
-description: Returns the health status of the expense-tracker service.
+description: Returns the health status of the product-tracker service.
 order: 1000

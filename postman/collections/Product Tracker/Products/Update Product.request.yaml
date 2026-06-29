@@ -1,0 +1,24 @@
+$kind: http-request
+name: Update Product
+method: PUT
+url: '{{baseUrl}}/products/{{product_id}}'
+order: 3000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Smartphone Pro",
+      "sku": "PHONE-123",
+      "price": "799.99",
+      "quantity": 8,
+      "description": "Upgraded smartphone model with more storage and RAM",
+      "category": "ELECTRONICS"
+    }

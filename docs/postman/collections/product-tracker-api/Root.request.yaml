@@ -1,0 +1,6 @@
+$kind: http-request
+name: Root
+method: GET
+url: '{{baseUrl}}/'
+description: Returns app name, version, and running status of the Product Tracker service.
+order: 1000

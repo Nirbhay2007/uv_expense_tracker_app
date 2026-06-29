@@ -47,12 +47,12 @@ def bootstrap_logging(level_name: str | int = "INFO") -> logging.Logger:
 
         root_logger.addHandler(handler)
 
-    return logging.getLogger("expense_tracker")
+    return logging.getLogger("product_tracker")
 
 
 def get_logger(name: str) -> logging.Logger:
     """Return a namespaced application logger."""
-    return logging.getLogger(f"expense_tracker.{name}")
+    return logging.getLogger(f"product_tracker.{name}")
 
 
-logger = logging.getLogger("expense_tracker")
+logger = logging.getLogger("product_tracker")

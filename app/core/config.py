@@ -7,7 +7,7 @@ class Settings(BaseSettings):
         case_sensitive=False,
     )
 
-    app_name: str = "Expense Tracker"
+    app_name: str = "Product Tracker"
     aws_region: str = "ap-south-1"
     log_level: str = "INFO"
 

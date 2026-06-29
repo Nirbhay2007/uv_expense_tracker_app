@@ -1,8 +1,8 @@
-name: Expense Tracker Local
+name: Product Tracker Local
 values:
   - key: baseUrl
     value: 'http://localhost:8000'
   - key: authToken
     value: ''
-  - key: expense_id
-    value: '9'
+  - key: product_id
+    value: '1'
