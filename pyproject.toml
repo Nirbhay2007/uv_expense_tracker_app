@@ -1,16 +1,21 @@
 [project]
 name = "learn-uv"
 version = "0.1.0"
-description = "Expense Tracker API"
+description = "Product Tracking API"
 readme = "README.md"
 requires-python = ">=3.13"
 
 dependencies = [
     "alembic>=1.18.4",
+    "bcrypt==4.0.1",
     "boto3>=1.42.97",
+    "email-validator>=2.3.0",
     "fastapi>=0.136.3",
+    "passlib[bcrypt]>=1.7.4",
     "psycopg2-binary>=2.9.12",
     "pydantic-settings>=2.11.0",
+    "python-jose[cryptography]>=3.5.0",
+    "python-multipart>=0.0.32",
     "sqlalchemy>=2.0.50",
     "uvicorn>=0.48.0",
 ]
@@ -34,3 +39,5 @@ select = ["E", "F", "I"]
 
 [tool.setuptools.packages.find]
 include = ["app*"]
+
+

@@ -1,0 +1,8 @@
+name: Product Tracker Local
+values:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: authToken
+    value: ''
+  - key: product_id
+    value: '1'

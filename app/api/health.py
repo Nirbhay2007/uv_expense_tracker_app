@@ -7,5 +7,5 @@ router = APIRouter(tags=["health"])
 async def health_check() -> dict[str, str]:
     return {
         "status": "healthy",
-        "service": "expense-tracker",
+        "service": "product-tracker",
     }

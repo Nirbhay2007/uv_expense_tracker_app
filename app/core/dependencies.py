@@ -4,8 +4,8 @@ from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from app.core.database import SessionLocal
-from app.repositories.expense_repository import ExpenseRepository
-from app.services.expense_service import ExpenseService
+from app.repositories.product_repository import ProductRepository
+from app.services.product_service import ProductService
 
 
 def get_db() -> Generator[Session, None, None]:
@@ -17,11 +17,11 @@ def get_db() -> Generator[Session, None, None]:
         db.close()
 
 
-def get_expense_service(
+def get_product_service(
     db: Session = Depends(get_db),
-) -> ExpenseService:
-    repository = ExpenseRepository(db)
+) -> ProductService:
+    repository = ProductRepository(db)
 
-    return ExpenseService(
+    return ProductService(
         repository
     )

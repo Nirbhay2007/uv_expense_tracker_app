@@ -1,8 +1,8 @@
 $kind: http-request
-name: Create Expense
+name: Register
 method: POST
-url: '{{baseUrl}}/expenses'
-order: 2000
+url: '{{baseUrl}}/auth/register'
+order: 1000
 headers:
   - key: Content-Type
     value: application/json
@@ -10,6 +10,6 @@ body:
   type: json
   content: |-
     {
-      "description": "Lunch",
-      "amount": "12.50"
+      "email": "user@example.com",
+      "password": "secret123"
     }

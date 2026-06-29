@@ -1,0 +1,10 @@
+$kind: http-request
+name: Get Products
+method: GET
+url: '{{baseUrl}}/products'
+order: 1000
+auth:
+  type: bearer
+  credentials:
+    - key: token
+      value: '{{authToken}}'
